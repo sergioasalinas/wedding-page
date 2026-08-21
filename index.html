@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Havila &amp; Sergio — 20.03.2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:      #FBF6EA;
+    --card:       #FFFDF8;
+    --ink:        #3B2F22;
+    --ink-soft:   #6B5D4C;
+    --terracotta: #BC5B34;
+    --terracotta-dark: #9A4726;
+    --olive:      #6E7B4F;
+    --olive-dark: #545F3B;
+    --lavender:   #8471A0;
+    --gold:       #CE9F3E;
+    --line:       #E4D9C4;
+    --shadow:     0 10px 30px -12px rgba(59,47,34,0.25);
+    --radius:     22px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Language toggle ---------- */
+  .lang-toggle{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:50;
+    display:flex;
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-radius:100px;
+    padding:4px;
+    box-shadow:var(--shadow);
+  }
+  .lang-toggle button{
+    font-family:'Karla',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:0.05em;
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    padding:7px 13px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:background 0.2s ease, color 0.2s ease;
+  }
+  .lang-toggle button.active{
+    background:var(--terracotta);
+    color:#fff;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    padding:80px 24px 60px;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(206,159,62,0.13), transparent),
+      var(--cream);
+  }
+  .hero-frame{
+    position:absolute;
+    inset:18px;
+    border:1.5px solid rgba(110,123,79,0.35);
+    border-radius:34px;
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Karla',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:12.5px;
+    color:var(--olive-dark);
+    font-weight:700;
+    margin-bottom:22px;
+    opacity:0;
+    animation:riseIn 0.9s ease-out 0.1s forwards;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    line-height:1.02;
+    color:var(--ink);
+    opacity:0;
+    animation:riseIn 1s ease-out 0.3s forwards;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:300;
+    display:block;
+    font-size:0.5em;
+    margin:10px 0;
+    color:var(--olive-dark);
+  }
+  .hero-date{
+    margin-top:26px;
+    font-size:clamp(1rem,2.4vw,1.25rem);
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    opacity:0;
+    animation:riseIn 1s ease-out 0.5s forwards;
+  }
+  .hero-place{
+    margin-top:6px;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    opacity:0;
+    animation:riseIn 1s ease-out 0.6s forwards;
+  }
+  .countdown{
+    margin-top:44px;
+    display:flex;
+    gap:clamp(14px,4vw,34px);
+    opacity:0;
+    animation:riseIn 1s ease-out 0.75s forwards;
+  }
+  .countdown div{text-align:center;}
+  .countdown .num{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.8rem,5vw,2.6rem);
+    color:var(--terracotta-dark);
+    font-variant-numeric:tabular-nums;
+  }
+  .countdown .lbl{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 0 46px;
+  }
+  .divider svg{width:120px;height:26px;color:var(--olive);}
+
+  /* ---------- SECTION ---------- */
+  section{padding:90px 0;}
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 56px;
+  }
+  .section-eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.24em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--terracotta);
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem,4vw,2.6rem);
+    color:var(--ink);
+  }
+  .section-head p{
+    margin-top:16px;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+
+  /* ---------- VENUE CARDS ---------- */
+  .venues{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  @media (max-width:760px){ .venues{grid-template-columns:1fr;} }
+  .venue-card{
+    background:var(--card);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+  }
+  .venue-map{
+    width:100%;
+    height:220px;
+    border:0;
+    display:block;
+    filter:sepia(8%) saturate(1.05);
+  }
+  .venue-body{padding:26px 26px 28px;}
+  .venue-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--olive-dark);
+    background:rgba(110,123,79,0.12);
+    padding:5px 12px;
+    border-radius:100px;
+    margin-bottom:14px;
+  }
+  .venue-body h3{font-size:1.35rem;margin-bottom:6px;}
+  .venue-body .addr{color:var(--ink-soft);font-size:0.94rem;margin-bottom:18px;}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Karla',sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    padding:10px 16px;
+    border-radius:100px;
+    text-decoration:none;
+    border:1.5px solid var(--terracotta);
+    color:var(--terracotta-dark);
+    transition:background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    cursor:pointer;
+    background:transparent;
+  }
+  .btn:hover{background:var(--terracotta); color:#fff; transform:translateY(-1px);}
+  .btn.ghost{border-color:var(--line); color:var(--ink-soft);}
+  .btn.ghost:hover{background:var(--ink); border-color:var(--ink); color:#fff;}
+  .btn.full{width:100%; justify-content:center;}
+  .btn:disabled{opacity:0.6; cursor:default; transform:none;}
+
+  /* ---------- TRAVEL ---------- */
+  .travel-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:760px){ .travel-grid{grid-template-columns:1fr;} }
+  .travel-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 26px;
+    box-shadow:var(--shadow);
+  }
+  .travel-card .flag{font-size:1.7rem;margin-bottom:10px;display:block;}
+  .travel-card h3{font-size:1.2rem;margin-bottom:10px;}
+  .travel-card p{color:var(--ink-soft);font-size:0.95rem;margin:0 0 10px;}
+  .travel-card ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:0.95rem;}
+  .travel-card li{margin-bottom:6px;}
+  .travel-note{
+    grid-column:1/-1;
+    background:rgba(206,159,62,0.14);
+    border:1px solid rgba(206,159,62,0.4);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    font-size:0.95rem;
+    color:var(--ink);
+  }
+  .travel-note strong{color:var(--terracotta-dark);}
+
+  /* ---------- STAY ---------- */
+  .stay-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:24px;
+  }
+  @media (max-width:760px){ .stay-grid{grid-template-columns:1fr;} }
+  .stay-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .stay-card .icon{
+    width:46px;height:46px;margin:0 auto 16px;
+    color:var(--olive-dark);
+  }
+  .stay-card h3{font-size:1.15rem;margin-bottom:8px;}
+  .stay-card p{color:var(--ink-soft);font-size:0.92rem;margin-bottom:18px;}
+
+  /* ---------- MUSIC ---------- */
+  .music-panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:32px;
+  }
+  .search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .search-row input{
+    flex:1;
+    padding:14px 18px;
+    border-radius:100px;
+    border:1.5px solid var(--line);
+    font-family:'Karla',sans-serif;
+    font-size:0.98rem;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+    transition:border-color 0.2s ease;
+  }
+  .search-row input:focus{border-color:var(--terracotta);}
+  .search-status{font-size:0.85rem;color:var(--ink-soft);min-height:18px;margin-bottom:8px;}
+  .track-list{display:flex;flex-direction:column;gap:10px;}
+  .track{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:10px;
+    border-radius:14px;
+    transition:background 0.15s ease;
+  }
+  .track:hover{background:rgba(110,123,79,0.08);}
+  .track img{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:var(--line);}
+  .track-meta{flex:1;min-width:0;}
+  .track-name{font-weight:600;font-size:0.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .track-artist{font-size:0.85rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .add-btn{
+    flex-shrink:0;
+    border:1.5px solid var(--olive);
+    color:var(--olive-dark);
+    background:transparent;
+    font-family:'Karla',sans-serif;
+    font-weight:600;
+    font-size:0.85rem;
+    padding:8px 14px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:all 0.2s ease;
+  }
+  .add-btn:hover{background:var(--olive); color:#fff;}
+  .add-btn.added{background:var(--olive-dark); border-color:var(--olive-dark); color:#fff; cursor:default;}
+  .suggested-box{
+    margin-top:26px;
+    padding-top:22px;
+    border-top:1px dashed var(--line);
+  }
+  .suggested-box h4{font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--olive-dark);margin-bottom:12px;}
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(110,123,79,0.12);
+    color:var(--olive-dark);
+    font-size:0.85rem;
+    padding:6px 12px;
+    border-radius:100px;
+    margin:0 8px 8px 0;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp-panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:36px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .field{margin-bottom:22px;}
+  .field label{
+    display:block;
+    font-weight:700;
+    font-size:0.92rem;
+    margin-bottom:9px;
+    color:var(--ink);
+  }
+  .field input[type="text"],
+  .field input[type="number"],
+  .field textarea{
+    width:100%;
+    padding:13px 16px;
+    border-radius:14px;
+    border:1.5px solid var(--line);
+    font-family:'Karla',sans-serif;
+    font-size:0.96rem;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+    transition:border-color 0.2s ease;
+    resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--terracotta);}
+  .attend-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .attend-choice{
+    flex:1;
+    min-width:160px;
+    text-align:center;
+    padding:14px 12px;
+    border-radius:14px;
+    border:1.5px solid var(--line);
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+    color:var(--ink-soft);
+    transition:all 0.2s ease;
+    background:#fff;
+  }
+  .attend-choice.selected{
+    border-color:var(--olive);
+    background:rgba(110,123,79,0.12);
+    color:var(--olive-dark);
+  }
+  .conditional-field{display:none;}
+  .conditional-field.show{display:block;}
+  .rsvp-status{font-size:0.9rem; margin-top:6px; min-height:20px; color:var(--ink-soft);}
+  .rsvp-success{
+    text-align:center;
+    padding:20px 10px;
+  }
+  .rsvp-success .icon{font-size:2.4rem; margin-bottom:12px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:70px 24px 50px;
+    color:var(--ink-soft);
+    font-size:0.9rem;
+  }
+  footer .display{font-size:1.4rem;color:var(--ink);margin-bottom:10px;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button id="lang-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="lang-es" onclick="setLang('es')">ES</button>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-frame"></div>
+  <div class="eyebrow" data-i18n="heroEyebrow">We're getting married</div>
+  <h1>Havila <em>&amp;</em> Sergio</h1>
+  <div class="hero-date" data-i18n="heroDate">Friday, 20 March 2027</div>
+  <div class="hero-place" data-i18n="heroPlace">Mourão, Alentejo — Portugal</div>
+  <div class="countdown" id="countdown">
+    <div><div class="num" id="cd-days">–</div><div class="lbl" data-i18n="cdDays">Days</div></div>
+    <div><div class="num" id="cd-hours">–</div><div class="lbl" data-i18n="cdHours">Hours</div></div>
+    <div><div class="num" id="cd-mins">–</div><div class="lbl" data-i18n="cdMins">Minutes</div></div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 13 C 30 2, 45 24, 60 13 S 90 2, 118 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="60" cy="13" r="3" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ================= THE DAY / VENUES ================= -->
+<section id="venues">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="venuesEyebrow">The Day</div>
+      <h2 data-i18n="venuesTitle">Ceremony &amp; Celebration</h2>
+      <p data-i18n="venuesIntro">Two stops in the Alentejo countryside — a whitewashed chapel in Mourão, followed by an evening among the olive groves.</p>
+    </div>
+    <div class="venues">
+      <div class="venue-card reveal">
+        <iframe class="venue-map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Paroquia+de+Nossa+Senhora+das+Candeias,+R.+Frei+Antonio+das+Chagas,+7240-265+Mourao,+Portugal&output=embed"></iframe>
+        <div class="venue-body">
+          <span class="venue-tag" data-i18n="tagCeremony">Ceremony</span>
+          <h3>Igreja de Nossa Senhora das Candeias</h3>
+          <div class="addr">R. Frei António das Chagas, 7240-265 Mourão, Portugal</div>
+          <div class="btn-row">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Paroquia+de+Nossa+Senhora+das+Candeias+Mourao+Portugal" data-i18n="btnMaps">Open in Google Maps</a>
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://waze.com/ul?q=Paroquia%20de%20Nossa%20Senhora%20das%20Candeias%2C%20Mourao%2C%20Portugal&navigate=yes" data-i18n="btnWaze">Open in Waze</a>
+          </div>
+        </div>
+      </div>
+      <div class="venue-card reveal">
+        <iframe class="venue-map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=38.33971380536551,-7.410835523853692&output=embed"></iframe>
+        <div class="venue-body">
+          <span class="venue-tag" data-i18n="tagReception">Reception</span>
+          <h3>Monte do Caneiro</h3>
+          <div class="addr">Luz, 7240-100 Mourão, Portugal</div>
+          <div class="btn-row">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=38.33971380536551,-7.410835523853692" data-i18n="btnMaps">Open in Google Maps</a>
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://waze.com/ul?ll=38.33971380536551,-7.410835523853692&navigate=yes" data-i18n="btnWaze">Open in Waze</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 13 C 30 2, 45 24, 60 13 S 90 2, 118 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="60" cy="13" r="3" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ================= TRAVEL ================= -->
+<section id="travel" style="background:rgba(110,123,79,0.06);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="travelEyebrow">Getting Here</div>
+      <h2 data-i18n="travelTitle">Travelling to Mourão</h2>
+      <p data-i18n="travelIntro">We know we're asking people to come a long way — here's what we've figured out for getting from Honduras and Belgium into rural Alentejo.</p>
+    </div>
+    <div class="travel-grid">
+      <div class="travel-card reveal">
+        <span class="flag">✈️</span>
+        <h3 data-i18n="travelCard1Title">Fly into Lisbon (LIS)</h3>
+        <p data-i18n="travelCard1P">Lisbon Humberto Delgado Airport is the gateway for everyone, regardless of where you're coming from. From there, Mourão is about a 2h15 drive south-east into the Alentejo region.</p>
+        <ul>
+          <li data-i18n="travelCard1Li1">No direct train to Mourão — a car is by far the easiest option.</li>
+          <li data-i18n="travelCard1Li2">One daily long-distance bus runs from Lisbon (Sete Rios) to Mourão, taking roughly 2h40–4h depending on transfers.</li>
+        </ul>
+      </div>
+      <div class="travel-card reveal">
+        <span class="flag">🚗</span>
+        <h3 data-i18n="travelCard2Title">Renting a car</h3>
+        <p data-i18n="travelCard2P">We'd recommend it, honestly — Alentejo is rural and the drive itself (rolling wheat fields, cork oaks, whitewashed villages) is part of the charm.</p>
+        <ul>
+          <li data-i18n="travelCard2Li1">Book ahead, especially for wedding weekend dates.</li>
+          <li data-i18n="travelCard2Li2">Toll roads in Portugal often require an electronic tag — most rental companies offer one at pickup.</li>
+          <li data-i18n="travelCard2Li3">Driving is on the right-hand side.</li>
+        </ul>
+      </div>
+      <div class="travel-card reveal">
+        <span class="flag">🇭🇳</span>
+        <h3 data-i18n="travelCard3Title">Coming from Honduras</h3>
+        <p data-i18n="travelCard3P">There's no direct flight from Honduras to Lisbon, so plan on one or two connections — commonly through Madrid, Miami, or another major European or US hub. We'd suggest starting flight searches early, and comparing routes on Google Flights or Skyscanner for the best connection times.</p>
+      </div>
+      <div class="travel-card reveal">
+        <span class="flag">🇧🇪</span>
+        <h3 data-i18n="travelCard4Title">Coming from Belgium</h3>
+        <p data-i18n="travelCard4P">Much simpler — Brussels to Lisbon is a short flight (around 2.5–3 hours), with multiple airlines operating the route. Direct flights are common, so this should be a straightforward one-hop trip.</p>
+      </div>
+      <div class="travel-note reveal">
+        <strong data-i18n="tipLabel">Tip:</strong> <span data-i18n="tipText">if a few of you are landing around the same time, consider splitting a rental car or a private transfer for the drive down — it's cheaper split, and much nicer than the bus. We'll share a group chat closer to the date so people can coordinate flights and rides.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 13 C 30 2, 45 24, 60 13 S 90 2, 118 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="60" cy="13" r="3" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ================= STAY ================= -->
+<section id="stay">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="stayEyebrow">Where to Stay</div>
+      <h2 data-i18n="stayTitle">A Place to Rest</h2>
+      <p data-i18n="stayIntro">We don't have a hotel block secured just yet — Mourão is small, so most of us will likely be staying in countryside guesthouses and Airbnbs nearby. We'll update this section as soon as we've locked something in.</p>
+    </div>
+    <div class="stay-grid">
+      <div class="stay-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="stayCard1Title">Airbnbs &amp; farmhouses</h3>
+        <p data-i18n="stayCard1P">Search stays around Mourão &amp; Monte do Caneiro — countryside monte-style houses are common in this area.</p>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.airbnb.com/s/Mour%C3%A3o--Portugal/homes" data-i18n="stayCard1Btn">Search Airbnb near Mourão</a>
+      </div>
+      <div class="stay-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 12h18" stroke-linecap="round"/></svg>
+        <h3 data-i18n="stayCard2Title">Guesthouses &amp; hotels</h3>
+        <p data-i18n="stayCard2P">A wider range of guesthouses and small hotels, including options in nearby Évora (about 50 min away) if Mourão fills up.</p>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.booking.com/searchresults.html?ss=Mour%C3%A3o%2C+Portugal" data-i18n="stayCard2Btn">Search Booking.com near Mourão</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 13 C 30 2, 45 24, 60 13 S 90 2, 118 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="60" cy="13" r="3" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ================= MUSIC ================= -->
+<section id="music" style="background:rgba(110,123,79,0.06);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="musicEyebrow">Our Playlist</div>
+      <h2 data-i18n="musicTitle">Suggest a Song</h2>
+      <p data-i18n="musicIntro">Help us build the reception playlist. Search the catalogue below and add anything that would get you on the dance floor.</p>
+    </div>
+    <div class="music-panel reveal">
+      <div class="search-row">
+        <input type="text" id="song-search" data-i18n-placeholder="musicPlaceholder" placeholder="Search for a song or artist…" autocomplete="off">
+      </div>
+      <div class="search-status" id="search-status"></div>
+      <div class="track-list" id="track-list"></div>
+      <div class="suggested-box" id="suggested-box" style="display:none;">
+        <h4 data-i18n="musicSuggestedHeading">Songs suggested so far (this session)</h4>
+        <div id="suggested-chips"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 120 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 13 C 30 2, 45 24, 60 13 S 90 2, 118 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="60" cy="13" r="3" fill="currentColor"/>
+  </svg>
+</div>
+
+<!-- ================= RSVP ================= -->
+<section id="rsvp">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="rsvpEyebrow">RSVP</div>
+      <h2 data-i18n="rsvpTitle">Will You Join Us?</h2>
+      <p data-i18n="rsvpIntro">We'd love to know if you'll be there — please fill this in whenever you're able.</p>
+    </div>
+    <div class="rsvp-panel reveal">
+      <form id="rsvp-form">
+        <div class="field">
+          <label for="rsvp-name" data-i18n="rsvpNameLabel">Full name</label>
+          <input type="text" id="rsvp-name" required>
+        </div>
+        <div class="field">
+          <label data-i18n="rsvpAttendLabel">Will you be attending?</label>
+          <div class="attend-row">
+            <div class="attend-choice" id="attend-yes" onclick="selectAttendance(true)" data-i18n="rsvpYes">Yes, I'll be there</div>
+            <div class="attend-choice" id="attend-no" onclick="selectAttendance(false)" data-i18n="rsvpNo">Sorry, can't make it</div>
+          </div>
+        </div>
+        <div class="field conditional-field" id="guests-field">
+          <label for="rsvp-guests" data-i18n="rsvpGuestsLabel">Number of guests (including you)</label>
+          <input type="number" id="rsvp-guests" min="1" max="10" value="1">
+        </div>
+        <div class="field conditional-field" id="dietary-field">
+          <label for="rsvp-dietary" data-i18n="rsvpDietaryLabel">Dietary restrictions or allergies</label>
+          <textarea id="rsvp-dietary" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label for="rsvp-message" data-i18n="rsvpMessageLabel">Message for the couple (optional)</label>
+          <textarea id="rsvp-message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn full" id="rsvp-submit" data-i18n="rsvpSubmit">Send RSVP</button>
+        <div class="rsvp-status" id="rsvp-status"></div>
+      </form>
+      <div class="rsvp-success" id="rsvp-success" style="display:none;">
+        <div class="icon">🌿</div>
+        <div data-i18n="rsvpSuccess">Thank you! We've got your RSVP.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="display">Havila &amp; Sergio</div>
+  <div>20.03.2027 · Mourão, Portugal</div>
+</footer>
+
+<script>
+/* ---------------- Translations ---------------- */
+const I18N = {
+  en: {
+    heroEyebrow: "We're getting married",
+    heroDate: "Friday, 20 March 2027",
+    heroPlace: "Mourão, Alentejo — Portugal",
+    cdDays: "Days", cdHours: "Hours", cdMins: "Minutes",
+    venuesEyebrow: "The Day",
+    venuesTitle: "Ceremony &amp; Celebration",
+    venuesIntro: "Two stops in the Alentejo countryside — a whitewashed chapel in Mourão, followed by an evening among the olive groves.",
+    tagCeremony: "Ceremony", tagReception: "Reception",
+    btnMaps: "Open in Google Maps", btnWaze: "Open in Waze",
+    travelEyebrow: "Getting Here",
+    travelTitle: "Travelling to Mourão",
+    travelIntro: "We know we're asking people to come a long way — here's what we've figured out for getting from Honduras and Belgium into rural Alentejo.",
+    travelCard1Title: "Fly into Lisbon (LIS)",
+    travelCard1P: "Lisbon Humberto Delgado Airport is the gateway for everyone, regardless of where you're coming from. From there, Mourão is about a 2h15 drive south-east into the Alentejo region.",
+    travelCard1Li1: "No direct train to Mourão — a car is by far the easiest option.",
+    travelCard1Li2: "One daily long-distance bus runs from Lisbon (Sete Rios) to Mourão, taking roughly 2h40–4h depending on transfers.",
+    travelCard2Title: "Renting a car",
+    travelCard2P: "We'd recommend it, honestly — Alentejo is rural and the drive itself (rolling wheat fields, cork oaks, whitewashed villages) is part of the charm.",
+    travelCard2Li1: "Book ahead, especially for wedding weekend dates.",
+    travelCard2Li2: "Toll roads in Portugal often require an electronic tag — most rental companies offer one at pickup.",
+    travelCard2Li3: "Driving is on the right-hand side.",
+    travelCard3Title: "Coming from Honduras",
+    travelCard3P: "There's no direct flight from Honduras to Lisbon, so plan on one or two connections — commonly through Madrid, Miami, or another major European or US hub. We'd suggest starting flight searches early, and comparing routes on Google Flights or Skyscanner for the best connection times.",
+    travelCard4Title: "Coming from Belgium",
+    travelCard4P: "Much simpler — Brussels to Lisbon is a short flight (around 2.5–3 hours), with multiple airlines operating the route. Direct flights are common, so this should be a straightforward one-hop trip.",
+    tipLabel: "Tip:",
+    tipText: "if a few of you are landing around the same time, consider splitting a rental car or a private transfer for the drive down — it's cheaper split, and much nicer than the bus. We'll share a group chat closer to the date so people can coordinate flights and rides.",
+    stayEyebrow: "Where to Stay",
+    stayTitle: "A Place to Rest",
+    stayIntro: "We don't have a hotel block secured just yet — Mourão is small, so most of us will likely be staying in countryside guesthouses and Airbnbs nearby. We'll update this section as soon as we've locked something in.",
+    stayCard1Title: "Airbnbs &amp; farmhouses",
+    stayCard1P: "Search stays around Mourão &amp; Monte do Caneiro — countryside monte-style houses are common in this area.",
+    stayCard1Btn: "Search Airbnb near Mourão",
+    stayCard2Title: "Guesthouses &amp; hotels",
+    stayCard2P: "A wider range of guesthouses and small hotels, including options in nearby Évora (about 50 min away) if Mourão fills up.",
+    stayCard2Btn: "Search Booking.com near Mourão",
+    musicEyebrow: "Our Playlist",
+    musicTitle: "Suggest a Song",
+    musicIntro: "Help us build the reception playlist. Search the catalogue below and add anything that would get you on the dance floor.",
+    musicPlaceholder: "Search for a song or artist…",
+    musicSuggestedHeading: "Songs suggested so far (this session)",
+    musicSearching: "Searching…",
+    musicNoMatches: "No matches — try a different search.",
+    musicError: "Couldn't reach the music catalogue — try again in a moment.",
+    musicAddBtn: "+ Suggest",
+    musicAdded: "Added ✓",
+    rsvpEyebrow: "RSVP",
+    rsvpTitle: "Will You Join Us?",
+    rsvpIntro: "We'd love to know if you'll be there — please fill this in whenever you're able.",
+    rsvpNameLabel: "Full name",
+    rsvpAttendLabel: "Will you be attending?",
+    rsvpYes: "Yes, I'll be there",
+    rsvpNo: "Sorry, can't make it",
+    rsvpGuestsLabel: "Number of guests (including you)",
+    rsvpDietaryLabel: "Dietary restrictions or allergies",
+    rsvpMessageLabel: "Message for the couple (optional)",
+    rsvpSubmit: "Send RSVP",
+    rsvpSuccess: "Thank you! We've got your RSVP.",
+    rsvpErrorAttend: "Please let us know if you'll be attending.",
+    rsvpErrorName: "Please enter your name."
+  },
+  es: {
+    heroEyebrow: "Nos casamos",
+    heroDate: "Viernes, 20 de marzo de 2027",
+    heroPlace: "Mourão, Alentejo — Portugal",
+    cdDays: "Días", cdHours: "Horas", cdMins: "Minutos",
+    venuesEyebrow: "El Día",
+    venuesTitle: "Ceremonia y Celebración",
+    venuesIntro: "Dos lugares en el campo del Alentejo — una capilla encalada en Mourão, seguida de una noche entre olivares.",
+    tagCeremony: "Ceremonia", tagReception: "Recepción",
+    btnMaps: "Abrir en Google Maps", btnWaze: "Abrir en Waze",
+    travelEyebrow: "Cómo Llegar",
+    travelTitle: "Viajar a Mourão",
+    travelIntro: "Sabemos que les pedimos venir desde muy lejos — esto es lo que hemos investigado para llegar desde Honduras y Bélgica hasta el Alentejo rural.",
+    travelCard1Title: "Vuela a Lisboa (LIS)",
+    travelCard1P: "El Aeropuerto Humberto Delgado de Lisboa es la puerta de entrada para todos, sin importar de dónde vengan. Desde ahí, Mourão está a unas 2h15 en coche hacia el sureste, dentro de la región del Alentejo.",
+    travelCard1Li1: "No hay tren directo a Mourão — el coche es, por mucho, la opción más sencilla.",
+    travelCard1Li2: "Hay un autobús de larga distancia diario desde Lisboa (Sete Rios) a Mourão, que tarda entre 2h40 y 4h dependiendo de las conexiones.",
+    travelCard2Title: "Alquilar un coche",
+    travelCard2P: "Lo recomendamos, sinceramente — el Alentejo es una zona rural y el propio trayecto (campos de trigo, alcornoques, pueblos encalados) es parte del encanto.",
+    travelCard2Li1: "Reserven con antelación, sobre todo por ser fin de semana de boda.",
+    travelCard2Li2: "Las autopistas de peaje en Portugal suelen requerir un dispositivo electrónico — la mayoría de las agencias de alquiler lo ofrecen al recoger el coche.",
+    travelCard2Li3: "Se conduce por el lado derecho.",
+    travelCard3Title: "Viajando desde Honduras",
+    travelCard3P: "No hay vuelo directo de Honduras a Lisboa, así que hay que contar con una o dos conexiones — normalmente vía Madrid, Miami u otro gran aeropuerto europeo o estadounidense. Les sugerimos buscar vuelos con tiempo y comparar rutas en Google Flights o Skyscanner para encontrar las mejores conexiones.",
+    travelCard4Title: "Viajando desde Bélgica",
+    travelCard4P: "Mucho más sencillo — Bruselas a Lisboa es un vuelo corto (entre 2.5 y 3 horas aproximadamente), con varias aerolíneas operando la ruta. Los vuelos directos son comunes, así que debería ser un viaje sencillo sin escalas.",
+    tipLabel: "Consejo:",
+    tipText: "si varios llegan sobre la misma fecha, consideren compartir un coche de alquiler o un traslado privado para el trayecto — sale más barato entre varios y es mucho más cómodo que el autobús. Compartiremos un grupo de chat más cerca de la fecha para coordinar vuelos y traslados.",
+    stayEyebrow: "Dónde Alojarse",
+    stayTitle: "Un Lugar para Descansar",
+    stayIntro: "Todavía no tenemos un bloque de hotel reservado — Mourão es pequeño, así que la mayoría probablemente se alojará en casas rurales y Airbnbs cercanos. Actualizaremos esta sección en cuanto tengamos algo confirmado.",
+    stayCard1Title: "Airbnbs y casas de campo",
+    stayCard1P: "Busca alojamientos cerca de Mourão y Monte do Caneiro — las casas rurales tipo &quot;monte&quot; son comunes en esta zona.",
+    stayCard1Btn: "Buscar Airbnb cerca de Mourão",
+    stayCard2Title: "Casas de huéspedes y hoteles",
+    stayCard2P: "Una gama más amplia de casas de huéspedes y hoteles pequeños, incluyendo opciones en la cercana Évora (a unos 50 min) si Mourão se llena.",
+    stayCard2Btn: "Buscar en Booking.com cerca de Mourão",
+    musicEyebrow: "Nuestra Playlist",
+    musicTitle: "Sugiere una Canción",
+    musicIntro: "Ayúdanos a armar la playlist de la recepción. Busca en el catálogo de abajo y añade lo que sea que te haga bailar.",
+    musicPlaceholder: "Busca una canción o artista…",
+    musicSuggestedHeading: "Canciones sugeridas hasta ahora (esta sesión)",
+    musicSearching: "Buscando…",
+    musicNoMatches: "Sin resultados — prueba con otra búsqueda.",
+    musicError: "No se pudo conectar con el catálogo — inténtalo de nuevo en un momento.",
+    musicAddBtn: "+ Sugerir",
+    musicAdded: "Añadida ✓",
+    rsvpEyebrow: "Confirmación",
+    rsvpTitle: "¿Nos Acompañas?",
+    rsvpIntro: "Nos encantaría saber si estarás — completa esto cuando puedas.",
+    rsvpNameLabel: "Nombre completo",
+    rsvpAttendLabel: "¿Asistirás?",
+    rsvpYes: "Sí, allí estaré",
+    rsvpNo: "Lo siento, no podré asistir",
+    rsvpGuestsLabel: "Número de invitados (incluyéndote)",
+    rsvpDietaryLabel: "Restricciones alimentarias o alergias",
+    rsvpMessageLabel: "Mensaje para los novios (opcional)",
+    rsvpSubmit: "Enviar confirmación",
+    rsvpSuccess: "¡Gracias! Hemos recibido tu confirmación.",
+    rsvpErrorAttend: "Por favor indícanos si asistirás.",
+    rsvpErrorName: "Por favor escribe tu nombre."
+  }
+};
+
+let currentLang = 'en';
+
+function applyTranslations(lang){
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+  });
+}
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('html-root').setAttribute('lang', lang);
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+  applyTranslations(lang);
+}
+
+/* ---------------- Countdown ---------------- */
+const weddingDate = new Date("2027-03-20T00:00:00");
+function updateCountdown(){
+  const now = new Date();
+  const diff = weddingDate - now;
+  if(diff <= 0){
+    document.getElementById('cd-days').textContent = "0";
+    document.getElementById('cd-hours').textContent = "0";
+    document.getElementById('cd-mins').textContent = "0";
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = hours;
+  document.getElementById('cd-mins').textContent = mins;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+/* ---------------- Reveal on scroll ---------------- */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.12});
+revealEls.forEach(el => io.observe(el));
+
+/* ---------------- Config ---------------- */
+/*
+  IMPORTANT — read SETUP.md for the one step needed to make song suggestions
+  AND RSVPs actually save somewhere you can see them (a free Google Sheet).
+  Until this URL is added, both forms still work for the guest, but nothing
+  is saved on your end.
+*/
+const CONFIG = {
+  // Paste your Google Apps Script Web App URL here — see SETUP.md
+  SHEET_ENDPOINT: ""
+};
+
+/* ---------------- Song search (iTunes Search API — free, no key) ---------------- */
+const searchInput = document.getElementById('song-search');
+const trackList = document.getElementById('track-list');
+const searchStatus = document.getElementById('search-status');
+const suggestedBox = document.getElementById('suggested-box');
+const suggestedChips = document.getElementById('suggested-chips');
+
+let debounceTimer;
+searchInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  const q = searchInput.value.trim();
+  if(q.length < 2){ trackList.innerHTML = ''; searchStatus.textContent = ''; return; }
+  searchStatus.textContent = I18N[currentLang].musicSearching;
+  debounceTimer = setTimeout(() => searchSongs(q), 400);
+});
+
+async function searchSongs(query){
+  try{
+    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=8`;
+    const res = await fetch(url);
+    const data = await res.json();
+    renderResults(data.results || []);
+  }catch(err){
+    searchStatus.textContent = I18N[currentLang].musicError;
+  }
+}
+
+function renderResults(results){
+  if(results.length === 0){
+    trackList.innerHTML = '';
+    searchStatus.textContent = I18N[currentLang].musicNoMatches;
+    return;
+  }
+  searchStatus.textContent = '';
+  trackList.innerHTML = results.map((t, i) => `
+    <div class="track">
+      <img src="${t.artworkUrl60 || ''}" alt="">
+      <div class="track-meta">
+        <div class="track-name">${escapeHtml(t.trackName || 'Unknown title')}</div>
+        <div class="track-artist">${escapeHtml(t.artistName || '')}</div>
+      </div>
+      <button class="add-btn" data-idx="${i}">${I18N[currentLang].musicAddBtn}</button>
+    </div>
+  `).join('');
+
+  trackList.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.idx);
+      const track = results[idx];
+      suggestSong(track, btn);
+    });
+  });
+}
+
+function suggestSong(track, btnEl){
+  btnEl.textContent = I18N[currentLang].musicAdded;
+  btnEl.classList.add('added');
+  btnEl.disabled = true;
+
+  const chip = document.createElement('span');
+  chip.className = 'chip';
+  chip.textContent = `${track.trackName} — ${track.artistName}`;
+  suggestedChips.appendChild(chip);
+  suggestedBox.style.display = 'block';
+
+  if(CONFIG.SHEET_ENDPOINT){
+    fetch(CONFIG.SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'text/plain'},
+      body: JSON.stringify({
+        formType: 'song',
+        track: track.trackName,
+        artist: track.artistName,
+        album: track.collectionName || '',
+        submittedAt: new Date().toISOString()
+      })
+    }).catch(() => { /* fail silently — the local chip confirmation still shows */ });
+  }
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/* ---------------- RSVP ---------------- */
+let attending = null;
+
+function selectAttendance(isAttending){
+  attending = isAttending;
+  document.getElementById('attend-yes').classList.toggle('selected', isAttending === true);
+  document.getElementById('attend-no').classList.toggle('selected', isAttending === false);
+  document.getElementById('guests-field').classList.toggle('show', isAttending === true);
+  document.getElementById('dietary-field').classList.toggle('show', isAttending === true);
+}
+
+document.getElementById('rsvp-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const statusEl = document.getElementById('rsvp-status');
+  const name = document.getElementById('rsvp-name').value.trim();
+
+  if(!name){
+    statusEl.textContent = I18N[currentLang].rsvpErrorName;
+    return;
+  }
+  if(attending === null){
+    statusEl.textContent = I18N[currentLang].rsvpErrorAttend;
+    return;
+  }
+  statusEl.textContent = '';
+
+  const payload = {
+    formType: 'rsvp',
+    name: name,
+    attending: attending ? 'Yes' : 'No',
+    guests: attending ? (document.getElementById('rsvp-guests').value || '1') : '0',
+    dietary: attending ? document.getElementById('rsvp-dietary').value.trim() : '',
+    message: document.getElementById('rsvp-message').value.trim(),
+    submittedAt: new Date().toISOString()
+  };
+
+  if(CONFIG.SHEET_ENDPOINT){
+    fetch(CONFIG.SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'text/plain'},
+      body: JSON.stringify(payload)
+    }).catch(() => { /* fail silently */ });
+  }
+
+  document.getElementById('rsvp-form').style.display = 'none';
+  document.getElementById('rsvp-success').style.display = 'block';
+  applyTranslations(currentLang);
+});
+</script>
+</body>
+</html>
