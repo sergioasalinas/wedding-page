@@ -406,6 +406,8 @@
   }
   .field input[type="text"],
   .field input[type="number"],
+  .field input[type="email"],
+  .field input[type="tel"],
   .field textarea{
     width:100%;
     padding:13px 16px;
@@ -420,6 +422,15 @@
     resize:vertical;
   }
   .field input:focus, .field textarea:focus{border-color:var(--terracotta);}
+  .field input.invalid, .field textarea.invalid{border-color:#B33A3A;}
+  .field-error{
+    color:#B33A3A;
+    font-size:0.82rem;
+    margin-top:6px;
+    min-height:0;
+    display:none;
+  }
+  .field-error.show{display:block;}
   .attend-row{display:flex; gap:10px; flex-wrap:wrap;}
   .attend-choice{
     flex:1;
@@ -467,6 +478,7 @@
 <div class="lang-toggle">
   <button id="lang-en" class="active" onclick="setLang('en')">EN</button>
   <button id="lang-es" onclick="setLang('es')">ES</button>
+  <button id="lang-pt" onclick="setLang('pt')">PT</button>
 </div>
 
 <!-- ================= HERO ================= -->
@@ -474,7 +486,7 @@
   <div class="hero-frame"></div>
   <div class="eyebrow" data-i18n="heroEyebrow">We're getting married</div>
   <h1>Havila <em>&amp;</em> Sergio</h1>
-  <div class="hero-date" data-i18n="heroDate">Friday, 20 March 2027</div>
+  <div class="hero-date" data-i18n="heroDate">Saturday, 20 March 2027</div>
   <div class="hero-place" data-i18n="heroPlace">Mourão, Alentejo — Portugal</div>
   <div class="countdown" id="countdown">
     <div><div class="num" id="cd-days">–</div><div class="lbl" data-i18n="cdDays">Days</div></div>
@@ -655,7 +667,7 @@
     <div class="section-head reveal">
       <div class="section-eyebrow" data-i18n="rsvpEyebrow">RSVP</div>
       <h2 data-i18n="rsvpTitle">Will You Join Us?</h2>
-      <p data-i18n="rsvpIntro">We'd love to know if you'll be there — please fill this in whenever you're able.</p>
+      <p data-i18n="rsvpIntro">We'd love to know if you'll be there — please fill this in whenever you're able, by December 31st, 2026.</p>
     </div>
     <div class="rsvp-panel reveal">
       <form id="rsvp-form">
@@ -677,6 +689,20 @@
         <div class="field conditional-field" id="dietary-field">
           <label for="rsvp-dietary" data-i18n="rsvpDietaryLabel">Dietary restrictions or allergies</label>
           <textarea id="rsvp-dietary" rows="2"></textarea>
+        </div>
+        <div class="field conditional-field" id="origin-field">
+          <label for="rsvp-origin" data-i18n="rsvpOriginLabel">Which city are you flying from?</label>
+          <input type="text" id="rsvp-origin" data-i18n-placeholder="rsvpOriginPlaceholder" placeholder="e.g. Brussels, Belgium">
+        </div>
+        <div class="field">
+          <label for="rsvp-email" data-i18n="rsvpEmailLabel">Email (so we can send updates)</label>
+          <input type="email" id="rsvp-email" data-i18n-placeholder="rsvpEmailPlaceholder" placeholder="you@example.com">
+          <div class="field-error" id="rsvp-email-error"></div>
+        </div>
+        <div class="field">
+          <label for="rsvp-phone" data-i18n="rsvpPhoneLabel">Phone number (WhatsApp works too)</label>
+          <input type="tel" id="rsvp-phone" data-i18n-placeholder="rsvpPhonePlaceholder" placeholder="+504…">
+          <div class="field-error" id="rsvp-phone-error"></div>
         </div>
         <div class="field">
           <label for="rsvp-message" data-i18n="rsvpMessageLabel">Message for the couple (optional)</label>
@@ -703,7 +729,7 @@
 const I18N = {
   en: {
     heroEyebrow: "We're getting married",
-    heroDate: "Friday, 20 March 2027",
+    heroDate: "Saturday, 20 March 2027",
     heroPlace: "Mourão, Alentejo — Portugal",
     cdDays: "Days", cdHours: "Hours", cdMins: "Minutes",
     venuesEyebrow: "The Day",
@@ -750,22 +776,30 @@ const I18N = {
     musicAdded: "Added ✓",
     rsvpEyebrow: "RSVP",
     rsvpTitle: "Will You Join Us?",
-    rsvpIntro: "We'd love to know if you'll be there — please fill this in whenever you're able.",
+    rsvpIntro: "We'd love to know if you'll be there — please fill this in whenever you're able, by December 31st, 2026.",
     rsvpNameLabel: "Full name",
     rsvpAttendLabel: "Will you be attending?",
     rsvpYes: "Yes, I'll be there",
     rsvpNo: "Sorry, can't make it",
     rsvpGuestsLabel: "Number of guests (including you)",
     rsvpDietaryLabel: "Dietary restrictions or allergies",
+    rsvpOriginLabel: "Which city are you flying from?",
+    rsvpOriginPlaceholder: "e.g. Brussels, Belgium",
+    rsvpEmailLabel: "Email (so we can send updates)",
+    rsvpEmailPlaceholder: "you@example.com",
+    rsvpPhoneLabel: "Phone number (WhatsApp works too)",
+    rsvpPhonePlaceholder: "+504…",
     rsvpMessageLabel: "Message for the couple (optional)",
     rsvpSubmit: "Send RSVP",
     rsvpSuccess: "Thank you! We've got your RSVP.",
     rsvpErrorAttend: "Please let us know if you'll be attending.",
-    rsvpErrorName: "Please enter your name."
+    rsvpErrorName: "Please enter your name.",
+    rsvpErrorEmail: "Please enter a valid email address.",
+    rsvpErrorPhone: "Please enter a valid phone number."
   },
   es: {
     heroEyebrow: "Nos casamos",
-    heroDate: "Viernes, 20 de marzo de 2027",
+    heroDate: "Sábado, 20 de marzo de 2027",
     heroPlace: "Mourão, Alentejo — Portugal",
     cdDays: "Días", cdHours: "Horas", cdMins: "Minutos",
     venuesEyebrow: "El Día",
@@ -812,18 +846,96 @@ const I18N = {
     musicAdded: "Añadida ✓",
     rsvpEyebrow: "Confirmación",
     rsvpTitle: "¿Nos Acompañas?",
-    rsvpIntro: "Nos encantaría saber si estarás — completa esto cuando puedas.",
+    rsvpIntro: "Nos encantaría saber si estarás — completa esto cuando puedas, antes del 31 de diciembre de 2026.",
     rsvpNameLabel: "Nombre completo",
     rsvpAttendLabel: "¿Asistirás?",
     rsvpYes: "Sí, allí estaré",
     rsvpNo: "Lo siento, no podré asistir",
     rsvpGuestsLabel: "Número de invitados (incluyéndote)",
     rsvpDietaryLabel: "Restricciones alimentarias o alergias",
+    rsvpOriginLabel: "¿Desde qué ciudad viajas?",
+    rsvpOriginPlaceholder: "ej. Bruselas, Bélgica",
+    rsvpEmailLabel: "Correo electrónico (para enviarte novedades)",
+    rsvpEmailPlaceholder: "tu@ejemplo.com",
+    rsvpPhoneLabel: "Número de teléfono (WhatsApp también sirve)",
+    rsvpPhonePlaceholder: "+504…",
     rsvpMessageLabel: "Mensaje para los novios (opcional)",
     rsvpSubmit: "Enviar confirmación",
     rsvpSuccess: "¡Gracias! Hemos recibido tu confirmación.",
     rsvpErrorAttend: "Por favor indícanos si asistirás.",
-    rsvpErrorName: "Por favor escribe tu nombre."
+    rsvpErrorName: "Por favor escribe tu nombre.",
+    rsvpErrorEmail: "Por favor introduce un correo electrónico válido.",
+    rsvpErrorPhone: "Por favor introduce un número de teléfono válido."
+  },
+  pt: {
+    heroEyebrow: "Vamos casar",
+    heroDate: "Sábado, 20 de março de 2027",
+    heroPlace: "Mourão, Alentejo — Portugal",
+    cdDays: "Dias", cdHours: "Horas", cdMins: "Minutos",
+    venuesEyebrow: "O Dia",
+    venuesTitle: "Cerimónia e Celebração",
+    venuesIntro: "Duas paragens no campo alentejano — uma capela caiada em Mourão, seguida de uma noite entre olivais.",
+    tagCeremony: "Cerimónia", tagReception: "Receção",
+    btnMaps: "Abrir no Google Maps", btnWaze: "Abrir no Waze",
+    travelEyebrow: "Como Chegar",
+    travelTitle: "Viajar até Mourão",
+    travelIntro: "Sabemos que estamos a pedir para virem de muito longe — aqui fica o que já descobrimos sobre chegar a partir das Honduras e da Bélgica até ao Alentejo rural.",
+    travelCard1Title: "Voar até Lisboa (LIS)",
+    travelCard1P: "O Aeroporto Humberto Delgado, em Lisboa, é a porta de entrada para todos, seja qual for a origem. A partir daí, Mourão fica a cerca de 2h15 de carro, a sudeste, já dentro da região do Alentejo.",
+    travelCard1Li1: "Não há comboio direto até Mourão — o carro é, de longe, a opção mais simples.",
+    travelCard1Li2: "Há um autocarro de longo curso diário entre Lisboa (Sete Rios) e Mourão, que demora entre 2h40 e 4h consoante as ligações.",
+    travelCard2Title: "Alugar um carro",
+    travelCard2P: "Recomendamos mesmo — o Alentejo é rural e o próprio percurso (campos de trigo, sobreiros, aldeias caiadas) já faz parte da experiência.",
+    travelCard2Li1: "Reservem com antecedência, ainda mais por ser fim de semana de casamento.",
+    travelCard2Li2: "As autoestradas com portagem em Portugal costumam exigir um dispositivo eletrónico — a maioria das rent-a-car oferece um na recolha do carro.",
+    travelCard2Li3: "Conduz-se pelo lado direito.",
+    travelCard3Title: "A viajar a partir das Honduras",
+    travelCard3P: "Não há voo direto das Honduras para Lisboa, por isso contem com uma ou duas ligações — normalmente via Madrid, Miami ou outro grande aeroporto europeu ou norte-americano. Sugerimos começar a pesquisar voos com antecedência e comparar rotas no Google Flights ou Skyscanner para encontrar as melhores ligações.",
+    travelCard4Title: "A viajar a partir da Bélgica",
+    travelCard4P: "Muito mais simples — Bruxelas a Lisboa é um voo curto (cerca de 2,5 a 3 horas), com várias companhias a operar a rota. Os voos diretos são comuns, por isso deverá ser uma viagem simples, sem escalas.",
+    tipLabel: "Dica:",
+    tipText: "se houver quem chegue por volta da mesma altura, pensem em dividir um carro alugado ou um transfer privado para a descida — sai mais barato a dividir, e é bem mais confortável do que o autocarro. Partilharemos um grupo mais perto da data para coordenar voos e boleias.",
+    stayEyebrow: "Onde Ficar",
+    stayTitle: "Um Lugar para Descansar",
+    stayIntro: "Ainda não temos um bloco de quartos reservado — Mourão é pequeno, por isso a maioria de nós deverá ficar em casas de campo e Airbnbs nas redondezas. Atualizaremos esta secção assim que tivermos algo confirmado.",
+    stayCard1Title: "Airbnbs e casas de campo",
+    stayCard1P: "Procurem alojamento perto de Mourão e do Monte do Caneiro — os montes alentejanos são comuns nesta zona.",
+    stayCard1Btn: "Procurar Airbnb perto de Mourão",
+    stayCard2Title: "Casas de hóspedes e hotéis",
+    stayCard2P: "Uma gama mais ampla de casas de hóspedes e pequenos hotéis, incluindo opções na vizinha Évora (cerca de 50 min) caso Mourão esgote.",
+    stayCard2Btn: "Procurar no Booking.com perto de Mourão",
+    musicEyebrow: "A Nossa Playlist",
+    musicTitle: "Sugere uma Música",
+    musicIntro: "Ajudem-nos a montar a playlist da receção. Pesquisem no catálogo abaixo e adicionem o que vos ponha a dançar.",
+    musicPlaceholder: "Procura uma música ou artista…",
+    musicSuggestedHeading: "Músicas sugeridas até agora (nesta sessão)",
+    musicSearching: "A procurar…",
+    musicNoMatches: "Sem resultados — tenta outra pesquisa.",
+    musicError: "Não foi possível ligar ao catálogo — tenta novamente daqui a pouco.",
+    musicAddBtn: "+ Sugerir",
+    musicAdded: "Adicionada ✓",
+    rsvpEyebrow: "Confirmação",
+    rsvpTitle: "Vais Estar Connosco?",
+    rsvpIntro: "Gostaríamos muito de saber se vais poder vir — preenche isto quando for possível, até 31 de dezembro de 2026.",
+    rsvpNameLabel: "Nome completo",
+    rsvpAttendLabel: "Vais comparecer?",
+    rsvpYes: "Sim, estarei lá",
+    rsvpNo: "Infelizmente não vou poder ir",
+    rsvpGuestsLabel: "Número de convidados (incluindo tu)",
+    rsvpDietaryLabel: "Restrições alimentares ou alergias",
+    rsvpOriginLabel: "De que cidade vais voar?",
+    rsvpOriginPlaceholder: "ex. Bruxelas, Bélgica",
+    rsvpEmailLabel: "Email (para te enviarmos novidades)",
+    rsvpEmailPlaceholder: "tu@exemplo.com",
+    rsvpPhoneLabel: "Número de telemóvel (WhatsApp também serve)",
+    rsvpPhonePlaceholder: "+351…",
+    rsvpMessageLabel: "Mensagem para os noivos (opcional)",
+    rsvpSubmit: "Enviar confirmação",
+    rsvpSuccess: "Obrigado! Já recebemos a tua confirmação.",
+    rsvpErrorAttend: "Por favor diz-nos se vais comparecer.",
+    rsvpErrorName: "Por favor escreve o teu nome.",
+    rsvpErrorEmail: "Por favor introduz um email válido.",
+    rsvpErrorPhone: "Por favor introduz um número de telemóvel válido."
   }
 };
 
@@ -846,6 +958,7 @@ function setLang(lang){
   document.getElementById('html-root').setAttribute('lang', lang);
   document.getElementById('lang-en').classList.toggle('active', lang === 'en');
   document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+  document.getElementById('lang-pt').classList.toggle('active', lang === 'pt');
   applyTranslations(lang);
 }
 
@@ -885,7 +998,6 @@ revealEls.forEach(el => io.observe(el));
   is saved on your end.
 */
 const CONFIG = {
-  // Paste your Google Apps Script Web App URL here — see SETUP.md
   SHEET_ENDPOINT: "https://script.google.com/macros/s/AKfycbwFQNUAfR-erdBRuZeGwD_DseBrn24ovwet5mhEorvlie0wKLt9U2SSxvSpYDGqodoA/exec"
 };
 
@@ -985,12 +1097,35 @@ function selectAttendance(isAttending){
   document.getElementById('attend-no').classList.toggle('selected', isAttending === false);
   document.getElementById('guests-field').classList.toggle('show', isAttending === true);
   document.getElementById('dietary-field').classList.toggle('show', isAttending === true);
+  document.getElementById('origin-field').classList.toggle('show', isAttending === true);
 }
+
+document.getElementById('rsvp-email').addEventListener('input', function(){
+  this.classList.remove('invalid');
+  document.getElementById('rsvp-email-error').classList.remove('show');
+});
+document.getElementById('rsvp-phone').addEventListener('input', function(){
+  this.classList.remove('invalid');
+  document.getElementById('rsvp-phone-error').classList.remove('show');
+});
 
 document.getElementById('rsvp-form').addEventListener('submit', function(e){
   e.preventDefault();
   const statusEl = document.getElementById('rsvp-status');
   const name = document.getElementById('rsvp-name').value.trim();
+  const emailInput = document.getElementById('rsvp-email');
+  const phoneInput = document.getElementById('rsvp-phone');
+  const emailError = document.getElementById('rsvp-email-error');
+  const phoneError = document.getElementById('rsvp-phone-error');
+  const email = emailInput.value.trim();
+  const phone = phoneInput.value.trim();
+
+  // reset previous error states
+  emailInput.classList.remove('invalid');
+  phoneInput.classList.remove('invalid');
+  emailError.classList.remove('show');
+  phoneError.classList.remove('show');
+  statusEl.textContent = '';
 
   if(!name){
     statusEl.textContent = I18N[currentLang].rsvpErrorName;
@@ -1000,7 +1135,24 @@ document.getElementById('rsvp-form').addEventListener('submit', function(e){
     statusEl.textContent = I18N[currentLang].rsvpErrorAttend;
     return;
   }
-  statusEl.textContent = '';
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!email || !emailPattern.test(email)){
+    emailInput.classList.add('invalid');
+    emailError.textContent = I18N[currentLang].rsvpErrorEmail;
+    emailError.classList.add('show');
+    return;
+  }
+
+  // Accept digits, spaces, +, -, ()
+  const phoneDigits = phone.replace(/\D/g, '');
+  const phonePattern = /^[0-9+\-\s()]+$/;
+  if(!phone || !phonePattern.test(phone) || phoneDigits.length < 1){
+    phoneInput.classList.add('invalid');
+    phoneError.textContent = I18N[currentLang].rsvpErrorPhone;
+    phoneError.classList.add('show');
+    return;
+  }
 
   const payload = {
     formType: 'rsvp',
@@ -1008,6 +1160,9 @@ document.getElementById('rsvp-form').addEventListener('submit', function(e){
     attending: attending ? 'Yes' : 'No',
     guests: attending ? (document.getElementById('rsvp-guests').value || '1') : '0',
     dietary: attending ? document.getElementById('rsvp-dietary').value.trim() : '',
+    origin: attending ? document.getElementById('rsvp-origin').value.trim() : '',
+    email: email,
+    phone: phone,
     message: document.getElementById('rsvp-message').value.trim(),
     submittedAt: new Date().toISOString()
   };
