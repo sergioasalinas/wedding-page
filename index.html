@@ -668,6 +668,11 @@
   .lb-scroll{max-width:96vw; max-height:94vh; overflow:auto; display:flex;}
   .lb-scroll img{display:block; margin:auto; flex:0 0 auto; user-select:none;}
   .lb-close{position:absolute; top:14px; right:16px; width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,.92); color:#222; font-size:1.7rem; line-height:1; cursor:pointer; z-index:2;}
+
+  /* ---------- search button + readable input on phones ---------- */
+  .search-btn{flex:0 0 auto; width:50px; border-radius:100px; border:1.5px solid var(--terracotta); background:var(--terracotta); color:var(--on-accent); cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
+  .search-row input{min-width:0; font-size:16px;}
+  .search-status{word-break:break-word;}
 </style>
 </head>
 <body>
@@ -921,7 +926,8 @@
     </div>
     <div class="music-panel reveal">
       <div class="search-row">
-        <input type="text" id="song-search" data-i18n-placeholder="musicPlaceholder" placeholder="Search for a song or artist…" autocomplete="off">
+        <input type="text" id="song-search" inputmode="search" enterkeyhint="search" data-i18n-placeholder="musicPlaceholder" placeholder="Search for a song or artist…" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button type="button" class="search-btn" id="song-search-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
       </div>
       <div class="search-status" id="search-status"></div>
       <div class="track-list" id="track-list"></div>
@@ -1533,46 +1539,57 @@ const suggestedBox = document.getElementById('suggested-box');
 const suggestedChips = document.getElementById('suggested-chips');
 
 let debounceTimer;
-searchInput.addEventListener('input', () => {
+function queueSearch(immediate){
   clearTimeout(debounceTimer);
   const q = searchInput.value.trim();
-  if(q.length < 2){ trackList.innerHTML = ''; searchStatus.textContent = ''; return; }
+  if(q.length < 2){ searchSeq++; trackList.innerHTML = ''; searchStatus.textContent = ''; return; }
   searchStatus.textContent = I18N[currentLang].musicSearching;
-  debounceTimer = setTimeout(() => searchSongs(q), 400);
-});
+  debounceTimer = setTimeout(() => searchSongs(q), immediate ? 0 : 350);
+}
+['input','keyup','change','search'].forEach(ev => searchInput.addEventListener(ev, e => {
+  if(ev === 'keyup' && e.key === 'Enter'){ searchInput.blur(); queueSearch(true); return; }
+  queueSearch(false);
+}));
+document.getElementById('song-search-btn').addEventListener('click', () => { searchInput.blur(); queueSearch(true); });
 
 let searchSeq = 0;
-// JSONP fallback: works even if the browser blocks the normal request (CORS/content blockers)
-function itunesJsonp(url){
+// Generic JSONP helper: works even when the browser blocks normal cross-site requests
+function jsonp(url, param){
   return new Promise((resolve, reject) => {
-    const cb = 'itunesCb' + Date.now() + Math.floor(Math.random() * 1e4);
+    const cb = 'songCb' + Date.now() + Math.floor(Math.random() * 1e5);
     const el = document.createElement('script');
-    const timer = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 8000);
-    function cleanup(){ clearTimeout(timer); delete window[cb]; el.remove(); }
+    const timer = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 9000);
+    function cleanup(){ clearTimeout(timer); try{ delete window[cb]; }catch(e){ window[cb] = undefined; } el.remove(); }
     window[cb] = data => { cleanup(); resolve(data); };
-    el.onerror = () => { cleanup(); reject(new Error('script error')); };
-    el.src = url + '&callback=' + cb;
+    el.onerror = () => { cleanup(); reject(new Error('blocked')); };
+    el.src = url + (url.indexOf('?') > -1 ? '&' : '?') + param + '=' + cb;
     document.head.appendChild(el);
   });
 }
+const mapItunes = d => (d && d.results || []);
+const mapDeezer = d => ((d && d.data) || []).map(t => ({
+  trackName: t.title, artistName: t.artist && t.artist.name, collectionName: t.album && t.album.title,
+  artworkUrl60: t.album && (t.album.cover_small || t.album.cover) }));
+const short = e => String(e && e.message || e).slice(0, 18);
 
 async function searchSongs(query){
-  const mySeq = ++searchSeq;
-  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=8`;
-  let data;
-  try{
-    const res = await fetch(url);
-    if(!res.ok) throw new Error('http ' + res.status);
-    data = await res.json();
-  }catch(err){
-    try{ data = await itunesJsonp(url); }
-    catch(err2){
-      console.error('Song search failed:', err, err2);
-      if(mySeq === searchSeq) searchStatus.textContent = I18N[currentLang].musicError;
-      return;
-    }
+  const mySeq = ++searchSeq, q = encodeURIComponent(query), errs = [];
+  const itunes = `https://itunes.apple.com/search?term=${q}&media=music&entity=song&limit=8`;
+  const deezer = `https://api.deezer.com/search?q=${q}&limit=8&output=jsonp`;
+  const attempts = [
+    ['itunes-fetch', async () => { const r = await fetch(itunes); if(!r.ok) throw new Error('http' + r.status); return mapItunes(await r.json()); }],
+    ['itunes-jsonp', async () => mapItunes(await jsonp(itunes, 'callback'))],
+    ['deezer-jsonp', async () => mapDeezer(await jsonp(deezer, 'callback'))]
+  ];
+  for(const [name, run] of attempts){
+    try{
+      const list = await run();
+      if(mySeq !== searchSeq) return;
+      renderResults(list); return;
+    }catch(e){ errs.push(name + ':' + short(e)); }
   }
-  if(mySeq === searchSeq) renderResults(data.results || []);
+  console.error('Song search failed', errs);
+  if(mySeq === searchSeq) searchStatus.textContent = I18N[currentLang].musicError + ' [' + errs.join(' | ') + ']';
 }
 
 function renderResults(results){
