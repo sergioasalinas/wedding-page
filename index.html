@@ -673,6 +673,23 @@
   .search-btn{flex:0 0 auto; width:50px; border-radius:100px; border:1.5px solid var(--terracotta); background:var(--terracotta); color:var(--on-accent); cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
   .search-row input{min-width:0; font-size:16px;}
   .search-status{word-break:break-word;}
+
+  /* ---------- OUTFIT STRIP: scrollable + auto-rolling ---------- */
+  .mq-wrap{position:relative;}
+  .marquee{overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling:touch; cursor:grab;}
+  .marquee::-webkit-scrollbar{display:none;}
+  .marquee.drag{cursor:grabbing;}
+  .mq-track{animation:none !important;}
+  .mq-arrow{position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:44px; height:44px; border-radius:50%; border:1.5px solid var(--line); background:var(--card); color:var(--ink); font-size:1.7rem; line-height:1; cursor:pointer; box-shadow:var(--shadow); padding:0;}
+  .mq-arrow.prev{left:12px;} .mq-arrow.next{right:12px;}
+  .mq-arrow:hover{background:var(--terracotta); color:var(--on-accent); border-color:var(--terracotta);}
+  @media (max-width:760px){ .mq-arrow{width:36px; height:36px; font-size:1.4rem;} .mq-arrow.prev{left:6px;} .mq-arrow.next{right:6px;} }
+  .lb-nav{position:absolute; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; border:0; background:rgba(255,255,255,.92); color:#222; font-size:1.9rem; line-height:1; cursor:pointer; z-index:2; padding:0;}
+  .lb-prev{left:14px;} .lb-next{right:14px;}
+  /* ---------- rental car + flight links in the tip box ---------- */
+  .tip-links{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
+  .tip-links .row{display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
+  .tip-links .lbl{font-weight:700; font-size:.9rem; margin-right:4px;}
 </style>
 </head>
 <body>
@@ -785,6 +802,15 @@
       </div>
       <div class="travel-note reveal">
         <strong data-i18n="tipLabel">Tip:</strong> <span data-i18n="tipText">if a few of you are landing around the same time, consider splitting a rental car or a private transfer for the drive down — it's cheaper split, and much nicer than the bus. We'll share a group chat closer to the date so people can coordinate flights and rides.</span>
+        <div class="tip-links">
+          <div class="row"><span class="lbl" data-i18n="travelLinksCars">Compare rental cars</span>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.booking.com/cars/">Booking.com</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.skyscanner.net/car-hire-from/lis/car-hire-from-lisbon-airport.html">Skyscanner</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.discovercars.com/">DiscoverCars</a></div>
+          <div class="row"><span class="lbl" data-i18n="travelLinksFlights">Compare flights</span>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/travel/flights?q=Flights%20to%20LIS">Google Flights</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.skyscanner.net/">Skyscanner</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -850,8 +876,12 @@
       <p data-i18n="attireIntro">Have fun with it! Think colors, floral, patterns and texture.</p>
     </div>
   </div>
-  <div class="marquee" data-speed="34" data-copies="4">
-    <div class="mq-track" style="--shift:25%"><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-1.jpg" alt="Attire guide: garden chic outfits for ladies and gents" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-2.jpg" alt="Outfit ideas for gentlemen: bright and colorful suits" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-3.jpg" alt="Moodboard of garden chic dresses and colors" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-4.jpg" alt="Collage of colorful dresses and outfits at a garden party" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-1.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-2.jpg" alt="" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-3.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-4.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-1.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-2.jpg" alt="" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-3.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-4.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-1.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-2.jpg" alt="" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-3.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-4.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button></div>
+  <div class="mq-wrap">
+    <button class="mq-arrow prev" type="button" aria-label="Previous pictures">&#8249;</button>
+    <div class="marquee" data-speed="34" data-copies="4">
+      <div class="mq-track"><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-1.jpg" alt="Attire guide: garden chic outfits for ladies and gents" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-2.jpg" alt="Outfit ideas for gentlemen: bright and colorful suits" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-3.jpg" alt="Moodboard of garden chic dresses and colors" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture"><img src="attire-4.jpg" alt="Collage of colorful dresses and outfits at a garden party" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-1.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-2.jpg" alt="" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-3.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-4.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-1.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-2.jpg" alt="" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-3.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-4.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-1.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-2.jpg" alt="" width="736" height="1104" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-3.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button><button class="mq-item" type="button" aria-label="Enlarge picture" aria-hidden="true" tabindex="-1"><img src="attire-4.jpg" alt="" width="675" height="1200" style="--h:560px" draggable="false"></button></div>
+    </div>
+    <button class="mq-arrow next" type="button" aria-label="Next pictures">&#8250;</button>
   </div>
   <div class="wrap">
     <p class="attire-hint" data-i18n="attireHint">Touch or hover to pause — tap a picture to enlarge it.</p>
@@ -1018,7 +1048,7 @@
   <div>20.03.2027 · Mourão, Portugal</div>
 </footer>
 
-<div id="lightbox" class="lightbox" aria-hidden="true"><button class="lb-close" type="button" aria-label="Close">&times;</button><div class="lb-scroll"><img alt=""></div></div>
+<div id="lightbox" class="lightbox" aria-hidden="true"><button class="lb-nav lb-prev" type="button" aria-label="Previous">&#8249;</button><button class="lb-nav lb-next" type="button" aria-label="Next">&#8250;</button><button class="lb-close" type="button" aria-label="Close">&times;</button><div class="lb-scroll"><img alt=""></div></div>
 <script>
 /* ---------------- Translations ---------------- */
 const I18N = {
@@ -1112,6 +1142,8 @@ const I18N = {
     attireAvoid: `We kindly ask all guests to avoid white, beige, silver and very pale colors that may look white in photos.`,
     rsvpSending: `Sending…`,
     rsvpErrorSend: `Something went wrong sending your RSVP. Please try again, or message us directly.`,
+    travelLinksCars: `Compare rental cars`,
+    travelLinksFlights: `Compare flights`,
     faqEyebrow: `Good to Know`,
     faqTitle: `Questions &amp; Answers`,
     faqIntro: `Everything else you might be wondering about.`,
@@ -1222,6 +1254,8 @@ const I18N = {
     attireAvoid: `Les pedimos amablemente que eviten el blanco, beige, plateado y los colores muy pálidos que puedan verse blancos en las fotos.`,
     rsvpSending: `Enviando…`,
     rsvpErrorSend: `Algo salió mal al enviar tu confirmación. Inténtalo de nuevo o escríbenos directamente.`,
+    travelLinksCars: `Compara coches de alquiler`,
+    travelLinksFlights: `Compara vuelos`,
     faqEyebrow: `Es Bueno Saber`,
     faqTitle: `Preguntas y Respuestas`,
     faqIntro: `Todo lo demás que quizá te estés preguntando.`,
@@ -1332,6 +1366,8 @@ const I18N = {
     attireAvoid: `Pedimos gentilmente a todos que evitem branco, bege, prateado e cores muito claras que possam parecer brancas nas fotografias.`,
     rsvpSending: `A enviar…`,
     rsvpErrorSend: `Algo correu mal ao enviar a tua confirmação. Tenta novamente ou escreve-nos diretamente.`,
+    travelLinksCars: `Comparar carros de aluguer`,
+    travelLinksFlights: `Comparar voos`,
     faqEyebrow: `Bom Saber`,
     faqTitle: `Perguntas e Respostas`,
     faqIntro: `Tudo o resto que possam estar a pensar.`,
@@ -1446,6 +1482,8 @@ const I18N = {
     attireAvoid: `We vragen alle gasten vriendelijk om wit, beige, zilver en zeer lichte kleuren te vermijden die op foto's wit kunnen lijken.`,
     rsvpSending: `Versturen…`,
     rsvpErrorSend: `Er ging iets mis bij het versturen van je RSVP. Probeer het opnieuw of stuur ons rechtstreeks een bericht.`,
+    travelLinksCars: `Vergelijk huurauto's`,
+    travelLinksFlights: `Vergelijk vluchten`,
     faqEyebrow: `Goed om te Weten`,
     faqTitle: `Vragen &amp; Antwoorden`,
     faqIntro: `Alles wat je je nog zou kunnen afvragen.`,
@@ -1791,46 +1829,95 @@ window.addEventListener('load', () => {
 })();
 
 
-/* ---------------- Rolling collage + enlarge ---------------- */
+/* ---------------- Outfit strip: auto-rolls, swipe / drag / arrows, tap to enlarge ---------------- */
 (function(){
-  const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img'), lbScroll = lb.querySelector('.lb-scroll');
-  const marquees = [...document.querySelectorAll('.marquee')];
-  function openLb(img, ratio){
-    const open = () => {
-      const nh = img.naturalHeight, nw = img.naturalWidth;
-      const k = Math.min(window.innerHeight*0.9/nh, window.innerWidth*0.94/nw*(nw/nw), 2.2) ;
-      const kk = nw/nh > 1.6 ? Math.min(window.innerHeight*0.9/nh, 2.2) : k;
-      lbImg.style.height = (nh*kk)+'px'; lbImg.style.width = (nw*kk)+'px';
-      lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
-      lbScroll.scrollLeft = Math.max(0, ratio*nw*kk - lbScroll.clientWidth/2);
+  const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const RESUME = 1800;                       // calm time (ms) after you touch / scroll before it rolls again
+  const strips = [];
+  let lbList = [], lbIndex = 0;
+  const now = () => performance.now();
+
+  function showLb(i){
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbImg.onload = () => {
+      const nh = lbImg.naturalHeight, nw = lbImg.naturalWidth;
+      const k = Math.min(window.innerHeight*0.9/nh, window.innerWidth*0.88/nw, 2.2);
+      lbImg.style.height = (nh*k) + 'px'; lbImg.style.width = (nw*k) + 'px';
     };
-    lbImg.onload = open; lbImg.src = img.currentSrc || img.src; if(lbImg.complete) open();
-    marquees.forEach(m => m.classList.add('paused'));
+    lbImg.src = lbList[lbIndex];
+    lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
   }
-  function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); marquees.forEach(m => m.classList.remove('paused')); }
-  lb.addEventListener('click', e => { if(e.target === lb || e.target.classList.contains('lb-close')) closeLb(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLb(); });
-  marquees.forEach(mq => {
-    const track = mq.querySelector('.mq-track'), speed = parseFloat(mq.dataset.speed || 38);
-    function setup(){
-      const imgs = track.querySelectorAll('img');
-      if(mq.dataset.overlap){
-        const s = imgs[0].offsetHeight / parseFloat(mq.dataset.baseh), ov = parseFloat(mq.dataset.overlap) * s;
-        imgs[1].style.marginLeft = (-ov) + 'px';
-        const period = imgs[0].offsetWidth - ov;
-        track.style.setProperty('--shift', period + 'px'); track.style.setProperty('--dur', (period/speed) + 's');
-      } else {
-        const copies = parseInt(mq.dataset.copies || 2), period = track.scrollWidth / copies; track.style.setProperty('--shift', period + 'px'); track.style.setProperty('--dur', (period/speed) + 's');
-      }
+  function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); strips.forEach(s => s.bump(700)); }
+  lb.addEventListener('click', e => {
+    if(e.target.classList.contains('lb-prev')) showLb(lbIndex - 1);
+    else if(e.target.classList.contains('lb-next')) showLb(lbIndex + 1);
+    else if(e.target === lb || e.target.classList.contains('lb-close')) closeLb();
+  });
+  document.addEventListener('keydown', e => {
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLb(); else if(e.key === 'ArrowLeft') showLb(lbIndex - 1); else if(e.key === 'ArrowRight') showLb(lbIndex + 1);
+  });
+  let sx = 0;
+  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 60) showLb(lbIndex + (dx < 0 ? 1 : -1)); }, {passive:true});
+
+  document.querySelectorAll('.marquee').forEach(mq => {
+    const track = mq.querySelector('.mq-track'), wrap = mq.parentElement;
+    const speed = parseFloat(mq.dataset.speed || 34), copies = parseInt(mq.dataset.copies || 4, 10);
+    const perSet = track.children.length / copies;
+    const sources = [...track.querySelectorAll('img')].slice(0, perSet).map(i => i.currentSrc || i.src);
+    let P = 0, pos = 0, last = now(), resumeAt = 0, lastUser = 0, selfWrite = false;
+    let hover = false, touching = false, dragging = false, moved = 0, wasActive = false;
+    const bump = ms => { resumeAt = now() + ms; };
+    strips.push({bump});
+
+    function measure(){
+      const p = track.scrollWidth / copies; if(!p) return;
+      const first = !P; P = p; if(first){ mq.scrollLeft = pos = P; }
     }
-    window.addEventListener('load', setup); window.addEventListener('resize', setup); setup();
-    let t; const pause = () => { clearTimeout(t); mq.classList.add('paused'); };
-    const resume = () => { clearTimeout(t); t = setTimeout(() => { if(!lb.classList.contains('open')) mq.classList.remove('paused'); }, 3500); };
-    mq.addEventListener('touchstart', pause, {passive:true}); mq.addEventListener('touchend', resume); mq.addEventListener('touchcancel', resume);
+    function normalize(){
+      if(!P) return;
+      let x = mq.scrollLeft;
+      while(x >= 2*P) x -= P;
+      while(x < P) x += P;
+      if(Math.abs(x - mq.scrollLeft) > 0.5) mq.scrollLeft = x;
+      pos = x;
+    }
+    mq.addEventListener('scroll', () => { if(!selfWrite) lastUser = now(); }, {passive:true});
+    mq.addEventListener('touchstart', () => { touching = true; }, {passive:true});
+    mq.addEventListener('touchend', () => { touching = false; bump(RESUME); }, {passive:true});
+    mq.addEventListener('touchcancel', () => { touching = false; bump(RESUME); }, {passive:true});
+    mq.addEventListener('wheel', () => bump(RESUME), {passive:true});
+    mq.addEventListener('pointerenter', e => { if(e.pointerType === 'mouse') hover = true; });
+    mq.addEventListener('pointerleave', e => { if(e.pointerType === 'mouse'){ hover = false; bump(600); } });
+    let sxm = 0, s0 = 0;
+    mq.addEventListener('pointerdown', e => { if(e.pointerType !== 'mouse' || e.button !== 0) return; dragging = true; moved = 0; sxm = e.clientX; s0 = mq.scrollLeft; mq.classList.add('drag'); });
+    window.addEventListener('pointermove', e => { if(!dragging) return; const dx = e.clientX - sxm; moved = Math.max(moved, Math.abs(dx)); mq.scrollLeft = s0 - dx; });
+    window.addEventListener('pointerup', () => { if(!dragging) return; dragging = false; mq.classList.remove('drag'); bump(RESUME); });
+    wrap.querySelector('.prev').addEventListener('click', () => { bump(RESUME + 600); mq.scrollBy({left: -mq.clientWidth*0.7, behavior:'smooth'}); });
+    wrap.querySelector('.next').addEventListener('click', () => { bump(RESUME + 600); mq.scrollBy({left:  mq.clientWidth*0.7, behavior:'smooth'}); });
     mq.addEventListener('click', e => {
-      const img = e.target.closest('.mq-item') && e.target.closest('.mq-item').querySelector('img'); if(!img) return;
-      const r = img.getBoundingClientRect(); openLb(img, (e.clientX - r.left)/r.width);
+      if(moved > 6){ moved = 0; return; }
+      const item = e.target.closest('.mq-item'); if(!item) return;
+      lbList = sources; showLb([...track.children].indexOf(item) % perSet);
     });
+    window.addEventListener('load', measure); window.addEventListener('resize', () => { measure(); normalize(); }); measure();
+
+    function frame(t){
+      const dt = Math.min(0.05, (t - last) / 1000); last = t;
+      selfWrite = false;
+      const n = now();
+      const active = !reduce && P > 0 && !hover && !touching && !dragging && !lb.classList.contains('open') && n >= resumeAt && (n - lastUser) > 300;
+      if(active){
+        if(!wasActive) normalize();
+        pos += speed * dt; if(pos >= 2*P) pos -= P;
+        mq.scrollLeft = pos; selfWrite = true;
+      }
+      wasActive = active;
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   });
 })();
 </script>
