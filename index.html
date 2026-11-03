@@ -690,6 +690,17 @@
   .tip-links{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
   .tip-links .row{display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
   .tip-links .lbl{font-weight:700; font-size:.9rem; margin-right:4px;}
+
+  /* ---------- links inside the flight and rental-car cards ---------- */
+  .card-links{margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);}
+  .card-links .lbl{display:block; font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--terracotta); margin-bottom:10px;}
+  .card-links .btn{font-size:.82rem; padding:8px 14px;}
+
+  /* ---------- WhatsApp invite after a "yes" RSVP ---------- */
+  .rsvp-wa{margin-top:24px; padding-top:24px; border-top:1px dashed var(--line); text-align:center;}
+  .rsvp-wa h3{font-size:1.2rem; margin-bottom:8px;}
+  .rsvp-wa p{color:var(--ink-soft); font-size:.95rem; margin:0 auto 16px; max-width:420px;}
+  .rsvp-wa img{width:200px; height:200px; border-radius:var(--radius); box-shadow:var(--shadow); display:block; margin:0 auto 16px; background:#fff;}
 </style>
 </head>
 <body>
@@ -779,6 +790,7 @@
           <li data-i18n="travelCard1Li1">No direct train to Mourão — a car is by far the easiest option.</li>
           <li data-i18n="travelCard1Li2">One daily long-distance bus runs from Lisbon (Sete Rios) to Mourão, taking roughly 2h40–4h depending on transfers.</li>
         </ul>
+        <div class="card-links"><span class="lbl" data-i18n="travelLinksFlights">Compare flights</span><div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/travel/flights?q=Flights%20to%20LIS">Google Flights</a><a class="btn" target="_blank" rel="noopener" href="https://www.skyscanner.net/">Skyscanner</a></div></div>
       </div>
       <div class="travel-card reveal">
         <span class="flag">🚗</span>
@@ -789,6 +801,7 @@
           <li data-i18n="travelCard2Li2">Toll roads in Portugal often require an electronic tag — most rental companies offer one at pickup.</li>
           <li data-i18n="travelCard2Li3">Driving is on the right-hand side.</li>
         </ul>
+        <div class="card-links"><span class="lbl" data-i18n="travelLinksCars">Compare rental cars</span><div class="btn-row"><a class="btn" target="_blank" rel="noopener" href="https://www.booking.com/cars/">Booking.com</a><a class="btn" target="_blank" rel="noopener" href="https://www.skyscanner.net/car-hire-from/lis/car-hire-from-lisbon-airport.html">Skyscanner</a><a class="btn" target="_blank" rel="noopener" href="https://www.discovercars.com/">DiscoverCars</a></div></div>
       </div>
       <div class="travel-card reveal">
         <span class="flag">🇭🇳</span>
@@ -802,15 +815,6 @@
       </div>
       <div class="travel-note reveal">
         <strong data-i18n="tipLabel">Tip:</strong> <span data-i18n="tipText">if a few of you are landing around the same time, consider splitting a rental car or a private transfer for the drive down — it's cheaper split, and much nicer than the bus. We'll share a group chat closer to the date so people can coordinate flights and rides.</span>
-        <div class="tip-links">
-          <div class="row"><span class="lbl" data-i18n="travelLinksCars">Compare rental cars</span>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.booking.com/cars/">Booking.com</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.skyscanner.net/car-hire-from/lis/car-hire-from-lisbon-airport.html">Skyscanner</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.discovercars.com/">DiscoverCars</a></div>
-          <div class="row"><span class="lbl" data-i18n="travelLinksFlights">Compare flights</span>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/travel/flights?q=Flights%20to%20LIS">Google Flights</a>
-            <a class="btn" target="_blank" rel="noopener" href="https://www.skyscanner.net/">Skyscanner</a></div>
-        </div>
       </div>
     </div>
   </div>
@@ -1036,6 +1040,12 @@
       <div class="rsvp-success" id="rsvp-success" style="display:none;">
         <div class="icon">🌿</div>
         <div data-i18n="rsvpSuccess">Thank you! We've got your RSVP.</div>
+        <div id="rsvp-whatsapp" class="rsvp-wa" style="display:none">
+          <h3 data-i18n="rsvpWaTitle">Join our WhatsApp community</h3>
+          <p data-i18n="rsvpWaText">Stay up to date with everything about the wedding. Scan the code, or tap the button if you're on your phone.</p>
+          <img src="whatsapp-qr.png" alt="QR code to join our WhatsApp community" width="560" height="560">
+          <a class="btn" target="_blank" rel="noopener" href="https://qr.codes/QNM7Pu" data-i18n="rsvpWaBtn">Join on WhatsApp</a>
+        </div>
       </div>
     </div>
     </div>
@@ -1144,6 +1154,9 @@ const I18N = {
     rsvpErrorSend: `Something went wrong sending your RSVP. Please try again, or message us directly.`,
     travelLinksCars: `Compare rental cars`,
     travelLinksFlights: `Compare flights`,
+    rsvpWaTitle: `Join our WhatsApp community`,
+    rsvpWaText: `Stay up to date with everything about the wedding. Scan the code, or tap the button if you're on your phone.`,
+    rsvpWaBtn: `Join on WhatsApp`,
     faqEyebrow: `Good to Know`,
     faqTitle: `Questions &amp; Answers`,
     faqIntro: `Everything else you might be wondering about.`,
@@ -1256,6 +1269,9 @@ const I18N = {
     rsvpErrorSend: `Algo salió mal al enviar tu confirmación. Inténtalo de nuevo o escríbenos directamente.`,
     travelLinksCars: `Compara coches de alquiler`,
     travelLinksFlights: `Compara vuelos`,
+    rsvpWaTitle: `Únete a nuestra comunidad de WhatsApp`,
+    rsvpWaText: `Mantente al día con todo lo de la boda. Escanea el código o toca el botón si estás desde tu teléfono.`,
+    rsvpWaBtn: `Unirme en WhatsApp`,
     faqEyebrow: `Es Bueno Saber`,
     faqTitle: `Preguntas y Respuestas`,
     faqIntro: `Todo lo demás que quizá te estés preguntando.`,
@@ -1368,6 +1384,9 @@ const I18N = {
     rsvpErrorSend: `Algo correu mal ao enviar a tua confirmação. Tenta novamente ou escreve-nos diretamente.`,
     travelLinksCars: `Comparar carros de aluguer`,
     travelLinksFlights: `Comparar voos`,
+    rsvpWaTitle: `Junta-te à nossa comunidade no WhatsApp`,
+    rsvpWaText: `Fica a par de tudo sobre o casamento. Lê o código ou toca no botão se estiveres no telemóvel.`,
+    rsvpWaBtn: `Entrar no WhatsApp`,
     faqEyebrow: `Bom Saber`,
     faqTitle: `Perguntas e Respostas`,
     faqIntro: `Tudo o resto que possam estar a pensar.`,
@@ -1484,6 +1503,9 @@ const I18N = {
     rsvpErrorSend: `Er ging iets mis bij het versturen van je RSVP. Probeer het opnieuw of stuur ons rechtstreeks een bericht.`,
     travelLinksCars: `Vergelijk huurauto's`,
     travelLinksFlights: `Vergelijk vluchten`,
+    rsvpWaTitle: `Word lid van onze WhatsApp-community`,
+    rsvpWaText: `Blijf op de hoogte van alles rond de bruiloft. Scan de code, of tik op de knop als je op je telefoon zit.`,
+    rsvpWaBtn: `Deelnemen via WhatsApp`,
     faqEyebrow: `Goed om te Weten`,
     faqTitle: `Vragen &amp; Antwoorden`,
     faqIntro: `Alles wat je je nog zou kunnen afvragen.`,
@@ -1780,6 +1802,7 @@ document.getElementById('rsvp-form').addEventListener('submit', function(e){
   send.then(() => {
     document.getElementById('rsvp-form').style.display = 'none';
     document.getElementById('rsvp-success').style.display = 'block';
+    document.getElementById('rsvp-whatsapp').style.display = attending ? 'block' : 'none';
     applyTranslations(currentLang);
   }).catch(() => {
     statusEl.textContent = I18N[currentLang].rsvpErrorSend;
